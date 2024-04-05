@@ -1,5 +1,6 @@
 // Import necessary modules
 const express = require('express');
+const cors = require('cors');
 const WebSocket = require('ws');
 const bodyParser = require('body-parser');
 const RateLimiter = require('limiter').RateLimiter;
@@ -14,9 +15,11 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors());
 
 // Rate limiter
 const limiterMin = new RateLimiter({ tokensPerInterval: maxRequests_min, interval: maxRequestWindowMS_min });
+const checkTokens = () => limiterMin.removeTokens(1);
 
 // WebSocket connection error handler
 function handleWebSocketError(err) {
@@ -67,7 +70,7 @@ app.get('/send-message', async (req, res) => {
         }
 
         const message = { message: 'some message' };
-
+        checkTokens();
         ws.send(JSON.stringify(message), (error) => {
             if (error) {
                 console.error('Error sending message:', error);
