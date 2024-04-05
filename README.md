@@ -1,8 +1,8 @@
-# WebSocket Server API Documentation
+# WebSocket Server and Client Demo
 
 ## Overview
 
-This WebSocket server allows clients to establish a WebSocket connection and send messages. It also provides an endpoint to open a WebSocket connection and send messages to the server.
+I didn't know how websockets worked, so I made this demo. This WebSocket server allows clients to establish a WebSocket connection and send messages. It also provides an endpoint to open a WebSocket connection and send messages to the server.
 
 ## Startup
 
